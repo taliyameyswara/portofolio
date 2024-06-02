@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wedding Invitation</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.7/dist/cdn.min.js"
+    ></script>
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Clicker+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              cor: ["Cormorant Garamond", "serif"],
+              clicker: ["Clicker Script", "cursive"],
+            },
+            colors: {
+              aqua: {
+                50: "#f2f7fc",
+                100: "#e2edf7",
+                200: "#c6def1",
+                300: "#a7cee9",
+                400: "#7db3dd",
+                500: "#5e97d3",
+                600: "#4a7fc6",
+                700: "#406cb5",
+                800: "#395894",
+                900: "#324c76",
+                950: "#222f49",
+              },
+            },
+          },
+        },
+        variants: {},
+      };
+    </script>
+  </head>
+  <body class="w-full max-w-md mx-auto bg-slate-100 font-cor" x-data="app">
+    <section
+      id="cover"
+      class="w-full overflow-hidden h-screen bg-cover bg-center"
+      style="background-image: url('./assets/images/cover.png')"
+      x-ref="headContent"
+    >
+      <div
+        class="w-full h-screen bg-gray-700/40 flex justify-center items-center flex-col relative"
+      >
+        <div id="monogram">
+          <img
+            src="./assets/images/monogram.png"
+            alt="Monogram"
+            class="w-1/3 mx-auto"
+          />
+        </div>
+        <div class="font-jost font-thin text-white text-sm">THE WEDDING OF</div>
+        <div
+          id="title"
+          class="font-clicker text-white text-4xl w-1/2 flex flex-col"
+        >
+          <h1 class="self-start mt-3">Marsha</h1>
+          <h1 class="self-center -mt-4">&</h1>
+          <h1 class="self-end -mt-7">Ahmad</h1>
+        </div>
+        <div id="date" class="mt-5">
+          <h2
+            class="font-light text-white text-sm text-white tracking-[0.2em] font-jost"
+          >
+            12.12.2023
+          </h2>
+        </div>
+        <div id="button-next" class="text-center mt-16">
+          <button
+            class="text-white text-xs tracking-wide font-jost flex items-center gap-1.5 px-4 py-2 bg-slate-300/50 rounded-full animation-pulse hover:bg-slate-800/80 transition ease-in-out"
+            @click="handleOpenInvitation"
+            x-show="!isLoadingCover"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-4"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21.75 9v.906a2.25 2.25 0 0 1-1.183 1.981l-6.478 3.488M2.25 9v.906a2.25 2.25 0 0 0 1.183 1.981l6.478 3.488m8.839 2.51-4.66-2.51m0 0-1.023-.55a2.25 2.25 0 0 0-2.134 0l-1.022.55m0 0-4.661 2.51m16.5 1.615a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V8.844a2.25 2.25 0 0 1 1.183-1.981l7.5-4.039a2.25 2.25 0 0 1 2.134 0l7.5 4.039a2.25 2.25 0 0 1 1.183 1.98V19.5Z"
+              />
+            </svg>
+            <p class="pt-0.5">Open Invitation</p>
+          </button>
+          <button x-show="isLoadingCover">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="2rem"
+              height="2rem"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="white"
+                d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"
+                opacity="0.65"
+              />
+              <path
+                fill="white"
+                d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"
+              >
+                <animateTransform
+                  attributeName="transform"
+                  dur="1.275s"
+                  repeatCount="indefinite"
+                  type="rotate"
+                  values="0 12 12;360 12 12"
+                />
+              </path>
+            </svg>
+          </button>
+        </div>
+        <div class="relative bottom-[-10rem] z-10 text-sm text-white">
+          © 2024 Marsha & Ahmad. All Rights Reserved
+        </div>
+        <div class="custom-shape-divider-bottom-1717319808 absolute bottom-0">
+          <svg
+            data-name="Layer 1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+              class="shape-fill"
+              fill="#94a3b8"
+              fill-opacity="0.83"
+            ></path>
+          </svg>
+        </div>
+        <div class="custom-shape-divider-bottom-1717319808 absolute bottom-3">
+          <svg
+            data-name="Layer 1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+              class="shape-fill"
+              fill="#94a3b8"
+              fill-opacity="0.3"
+            ></path>
+          </svg>
+        </div>
+        <div class="custom-shape-divider-bottom-1717319808 absolute bottom-2">
+          <svg
+            data-name="Layer 1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+              class="shape-fill"
+              fill="#94a3b8"
+              fill-opacity="0.35"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <main x-show="openInvitation" x-ref="mainContent">
+      <section
+        id="welcoming"
+        class="w-full min-h-screen bg-white"
+        x-ref="welcoming"
+      >
+        <div id="welcoming-desc">
+          <div id="content" class="relative flex flex-col items-center">
+            <div class="relative w-full">
+              <img
+                src="./assets/images/welcoming.jpeg"
+                alt=""
+                class="h-80 w-full object-cover fade-down"
+              />
+              <div
+                class="absolute bottom-0 w-full custom-shape-divider-bottom-1717319808"
+              >
+                <svg
+                  data-name="Layer 1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 1200 120"
+                  preserveAspectRatio="none"
+                  class="w-full h-auto"
+                >
+                  <path
+                    d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                    class="shape-fill"
+                    style="fill: #fff !important; fill-opacity: 1"
+                  ></path>
+                </svg>
+              </div>
+              <div
+                class="absolute bottom-1 w-full custom-shape-divider-bottom-1717319808"
+              >
+                <svg
+                  data-name="Layer 1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 1200 120"
+                  preserveAspectRatio="none"
+                  class="w-full h-auto"
+                >
+                  <path
+                    d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                    class="shape-fill"
+                    style="fill: #fff !important; fill-opacity: 0.5"
+                  ></path>
+                </svg>
+              </div>
+              <div
+                class="absolute bottom-2 w-full custom-shape-divider-bottom-1717319808"
+              >
+                <svg
+                  data-name="Layer 1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 1200 120"
+                  preserveAspectRatio="none"
+                  class="w-full h-auto"
+                >
+                  <path
+                    d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                    class="shape-fill"
+                    style="fill: #fff !important; fill-opacity: 0.5"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+
+            <img
+              src="./assets/images/flower2.png"
+              alt=""
+              class="h-16 w-60 object-cover z-10 fade-up"
+            />
+
+            <div class="p-10">
+              <div
+                class="z-10 relative bottom-12 mt-10 w-full max-w-md bg-slate-400/30 rounded-xl fade-down"
+              >
+                <p class="text-xs text-center px-5 py-5 text-slate-500">
+                  Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia
+                  menciptakan pasangan-pasangan untukmu dari jenismu sendiri,
+                  agar kamu cenderung dan merasa tenteram kepadanya, dan Dia
+                  menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada
+                  yang demikian itu benar-benar terdapat tanda-tanda (kebesaran
+                  Allah) bagi kaum yang berpikir.
+                  <br />
+                  <br />
+                  <span class="font-semibold">(QR. Ar-Rum:21)</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="px-10">
+              <div class="z-10 relative bottom-14 w-full max-w-md">
+                <p class="text-sm text-center px-5 py-5 text-slate-700 fade-up">
+                  <span class="font-semibold"> Kepada Yth.</span>
+                  <br />
+                  Bapak/Ibu/Saudara/i
+                </p>
+                <p
+                  class="text-sm text-center px-5 text-slate-600 font-light fade-down"
+                >
+                  Dengan memohon anugerah dan berkat Tuhan, kami memohon
+                  kehadiran Bapak/Ibu/Saudara/i pada acara pernikahan kami:
+                </p>
+              </div>
+            </div>
+
+            <div class="px-10">
+              <div class="z-10 relative bottom-14 w-full max-w-md text-center">
+                <div class="flex flex-col items-center">
+                  <div
+                    class="pt-10 pb-5 text-5xl font-clicker text-slate-600 fade-up duration-[500ms] taos:translate-y-[50px] taos:opacity-0"
+                  >
+                    Marsha
+                  </div>
+                  <div
+                    class="font-light text-xl fade-down duration-[500ms] taos:translate-y-[-50px] taos:opacity-0"
+                  >
+                    Marshanda Sophia S.Kom
+                  </div>
+                  <div
+                    class="font-extralight text-sm mt-1 text-slate-500 fade-down duration-[500ms] taos:translate-y-[-50px] taos:opacity-0"
+                  >
+                    Putra dari Bapak Victor Pamungkas Suryaputra, <br />
+                    Dan Ibu Imelda Yunita Widjaja
+                  </div>
+                  <img
+                    src="./assets/images/bride.jpg"
+                    class="w-48 h-72 object-cover flex mt-5 rounded-full border border-slate-800 fade-up duration-[500ms] taos:scale-[0.6] taos:opacity-0"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="px-10">
+              <div class="z-10 relative bottom-14 w-full max-w-md text-center">
+                <div class="flex flex-col items-center">
+                  <div
+                    class="pt-10 pb-5 text-5xl font-clicker text-slate-600 fade-up duration-[500ms] taos:translate-y-[50px] taos:opacity-0"
+                  >
+                    Ahmad
+                  </div>
+                  <div
+                    class="font-light text-x fade-down duration-[500ms] taos:translate-y-[-50px] taos:opacity-0"
+                  >
+                    Ahmad Dhani Saputra S.H
+                  </div>
+                  <div
+                    class="font-extralight text-sm mt-1 text-slate-500 fade-down duration-[500ms] taos:translate-y-[-50px] taos:opacity-0"
+                  >
+                    Putra dari Bapak Victor Pamungkas Suryaputra, <br />
+                    Dan Ibu Imelda Yunita Widjaja
+                  </div>
+                  <img
+                    src="./assets/images/groom.jpg"
+                    class="w-48 h-72 object-cover flex mt-5 rounded-full border border-slate-800 fade-up duration-[500ms] taos:scale-[0.6] taos:opacity-0"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full">
+              <div
+                class="z-10 relative w-full py-16 max-w-md bg-slate-500/15 text-slate-600"
+              >
+                <div class="p-3 text-center">
+                  <img
+                    src="./assets/images/flower1.png"
+                    alt=""
+                    class="w-48 absolute top-1 mt-2"
+                  />
+                  <img
+                    src="./assets/images/flower1.png"
+                    alt=""
+                    class="w-48 absolute top-1 left-1/2 ml-5 mt-2 transform scale-x-[-1]"
+                  />
+                  <img
+                    src="./assets/images/flower1.png"
+                    alt=""
+                    class="w-48 absolute bottom-1 mt-2 scale-y-[-1]"
+                  />
+                  <img
+                    src="./assets/images/flower1.png"
+                    alt=""
+                    class="w-48 absolute bottom-1 left-1/2 ml-5 mt-2 transform scale-x-[-1] scale-y-[-1]"
+                  />
+
+                  <h1
+                    class="text-2xl justify-center mb-5 duration-[500ms] taos:translate-y-[-50px] taos:opacity-0"
+                  >
+                    DETAIL ACARA
+                  </h1>
+                  <div
+                    class="flex justify-center duration-[500ms] taos:translate-x-[-100px] taos:opacity-0"
+                  >
+                    <div class="h-[0.6px] w-20 bg-slate-500 mb-5"></div>
+                  </div>
+                  <div class="">
+                    <h1
+                      class="text-2xl justify-center my-3 font-semibold duration-[500ms] taos:translate-y-[50px] taos:opacity-0"
+                    >
+                      Akad Nikah
+                    </h1>
+                    <div
+                      class="flex justify-center mb-2 duration-[500ms] taos:translate-y-[-50px] taos:opacity-0"
+                    >
+                      <div
+                        class="md:text-lg text-base font-light bg-slate-400/20 px-2 rounded"
+                      >
+                        Senin, 21 Juli 2024 | 10.00 - 11.30 WIB
+                      </div>
+                    </div>
+                    <div
+                      class="font-light md:text-base text-sm duration-[500ms] taos:translate-y-[-50px] taos:opacity-0"
+                    >
+                      Masjid Agung Jawa Tengah, <br />
+                      Jl. Gajah Raya, Sambirejo, Kec. Gayamsari,<br />
+                      Kota Semarang, Jawa Tengah
+                    </div>
+                  </div>
+
+                  <a
+                    href="https://www.google.com/maps?gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGDsyBggCEEUYOzIGCAMQRRg5MgcIBBAAGI8C0gEIMTMzNGowajeoAgCwAgA&um=1&ie=UTF-8&fb=1&gl=id&sa=X&geocode=KTnTus8V8WkuMeMjoIRnInpZ&daddr=12,+Jl.+Kyai+Maja+No.39,+RT.12/RW.2,+Gunung,+Kec.+Kby.+Baru,+Kota+Jakarta+Selatan,+Daerah+Khusus+Ibukota+Jakarta+12120"
+                    class="cursor-pointer duration-[500ms] taos:translate-y-[-50px] taos:opacity-0"
+                    target="_blank"
+                  >
+                    <div class="flex items-center justify-center gap-1.5 mt-6">
+                      <div
+                        class="text-white text-xs tracking-wide px-4 py-2 rounded-full animation-pulse bg-slate-700 transition ease-in-out"
+                      >
+                        Lihat Peta
+                      </div>
+                    </div>
+                  </a>
+
+                  <div class="pt-5">
+                    <h1
+                      class="text-2xl justify-center my-3 font-semibold duration-[500ms] taos:translate-y-[50px] taos:opacity-0"
+                    >
+                      Resepsi
+                    </h1>
+                    <div class="flex justify-center mb-2">
+                      <div
+                        class="md:text-lg text-base font-light bg-slate-400/20 px-2 rounded duration-[500ms] taos:translate-x-[-100px] taos:opacity-0"
+                      >
+                        Senin, 21 Juli 2024 | 10.00 - 11.30 WIB
+                      </div>
+                    </div>
+                    <div
+                      class="md:text-base text-sm font-light px-6 duration-[500ms] taos:translate-y-[-50px] taos:opacity-0"
+                    >
+                      Blue Jasmine Restaurant, <br />
+                      Jl. Kyai Maja No.39, RT.12/RW.2, Gunung, Kec. Kby. Baru,
+                      Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta
+                    </div>
+                  </div>
+
+                  <a
+                    href="https://www.google.com/maps?gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGDsyBggCEEUYOzIGCAMQRRg5MgcIBBAAGI8C0gEIMTMzNGowajeoAgCwAgA&um=1&ie=UTF-8&fb=1&gl=id&sa=X&geocode=KTnTus8V8WkuMeMjoIRnInpZ&daddr=12,+Jl.+Kyai+Maja+No.39,+RT.12/RW.2,+Gunung,+Kec.+Kby.+Baru,+Kota+Jakarta+Selatan,+Daerah+Khusus+Ibukota+Jakarta+12120"
+                    class="cursor-pointer"
+                    target="_blank"
+                  >
+                    <div class="flex items-center justify-center gap-1.5 mt-6">
+                      <div
+                        class="text-white text-xs tracking-wide px-4 py-2 rounded-full animation-pulse bg-slate-700 transition ease-in-out"
+                      >
+                        Lihat Peta
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full">
+              <div
+                class="w-full h-96 bg-cover bg-center"
+                style="background-image: url('./assets/images/cover.png')"
+              >
+                <div
+                  class="w-full text-center h-96 pb-24 bg-gray-700/40 px-10 flex justify-center items-center flex-col relative"
+                >
+                  <img
+                    src="./assets/images/monogram.png"
+                    alt=""
+                    class="w-1/2 mt-10"
+                  />
+                  <div class="text-white text-sm">
+                    Menjadi sebuah kebahagiaan bagi kami apabila
+                    Bapak/Ibu/Saudara/i berkenan hadir dalam hari bahagia kami.
+                    Terima kasih atas segala ucapan, doa, dan perhatian yang
+                    diberikan. Sampai jumpa di hari bahagia kami!
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="z-10 relative w-full pt-10 max-w-md text-slate-600">
+              <div class="px-10">
+                <div
+                  class="z-10 relative bottom-14 w-full max-w-md text-center"
+                >
+                  <div class="flex flex-col items-center">
+                    <div class="pt-8 text-sm mb-5">
+                      “I don’t want you in bits or pieces,<br />
+                      I want you all, Good and Bad , <br />Every last Atom”
+                    </div>
+                    <img
+                      src="./assets/images/monogram2.png"
+                      alt=""
+                      class="h-20 w-48 object-cover duration-[500ms] taos:scale-[0.6] taos:opacity-0"
+                    />
+                    <!-- <img
+                    src="./assets/images/bride.jpg"
+                    alt=""
+                    class="h-72 w-48 rounded-xl object-cover"
+                  /> -->
+                    <div class="pt-8 text-sm mb-5">
+                      With Love, <br />Marsha & Ahmad
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="custom-shape-divider-bottom-1717319808 w-full max-w-md bottom-[95%]"
+              >
+                <svg
+                  data-name="Layer 1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 1200 120"
+                  preserveAspectRatio="none"
+                  style="height: 100px !important; width: calc(210% + 1.3px)"
+                >
+                  <path
+                    d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                    class="shape-fill"
+                    style="fill: #fff !important"
+                    fill-opacity="1"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+
+            <div class="w-full">
+              <div class="w-full max-w-md text-center">
+                <div
+                  class="flex flex-col text-xs items-center p-3 bg-slate-700 text-white"
+                >
+                  <div>© 2024 Marsha & Ahmad. All Rights Reserved</div>
+                  <div>Song by This Love · Tyler Brown Williams</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="https://unpkg.com/taos@1.0.5/dist/taos.js"></script>
+  </body>
+
+  <script src="./assets/alpine/app.js"></script>
+</html>

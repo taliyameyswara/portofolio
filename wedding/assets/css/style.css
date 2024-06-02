@@ -1,0 +1,83 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.clicker-script-regular {
+  font-family: "Clicker Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.jost-regular {
+  font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.animation-pulse {
+  animation: pulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.03);
+  }
+}
+
+.bg-sky {
+  background-color: #c2eaf4;
+}
+
+.custom-shape-divider-bottom-1717319808 {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-bottom-1717319808 svg {
+  position: relative;
+  display: block;
+  width: calc(300% + 1.3px);
+  height: 160px;
+}
+
+.custom-shape-divider-bottom-1717319808 .shape-fill {
+  fill: #94a3b8;
+}
+
+.fade-up {
+  animation: fade-up 0.5s;
+}
+
+.fade-down {
+  animation: fade-down 0.5s;
+}
+
+@keyframes fade-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+}
